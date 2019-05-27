@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\User;
-use App\Model\Level;
 use App\Model\User;
-use App\Model\Verify;
-use App\Model\Vip;
 use App\Providers\EmailServiceProvider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;

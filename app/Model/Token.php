@@ -39,8 +39,6 @@ class Token extends Model
      * 通过token获取用户信息
      * 登录成功返回userinfo，失败返回false
      *add by 毛毛
-     * 今天端午节？
-     * 在家写代码
      */
     public static function get_userinfo($token)
     {

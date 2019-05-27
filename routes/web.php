@@ -21,8 +21,8 @@ Route::group(['prefix'=>'user'],function(){
 });
 
 /*article*/
-Route::group(['prefix'=>'article'],function(){
-    Route::any('/get_article', 'Article\ArticleController@get_article');
+Route::group(['prefix'=>'event'],function(){
+    Route::any('/info', 'Event\EventController@info');
 });
 
 

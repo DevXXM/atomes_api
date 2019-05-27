@@ -20,6 +20,7 @@ class CardController extends CommonController
      * 生成
      * 登录成功返回0 success，失败返回-1
      * add by 毛毛
+     * 2018年6月20日11:16:43
      */
     public function make_card(Request $request){
         $number = $request->get('number');//生成数量
@@ -39,6 +40,7 @@ class CardController extends CommonController
      * 激活卡
      * 登录成功返回0 success，失败返回-1
      * add by 毛毛
+     * 2018年6月20日11:16:43
      */
     public function activation_card(Request $request){
         $card_number = $request->get('card_number');//生成数量
@@ -62,6 +64,7 @@ class CardController extends CommonController
      * 我的会员卡
      * 登录成功返回0 success，失败返回-1
      * add by 毛毛
+     * 2018年7月11日21:59:38
      */
     public function my_card(Request $request){
         $user = $request->userinfo;

@@ -117,9 +117,6 @@ class User extends Model
      * 通过uid获取用户信息
      * 成功返回用户信息，失败返回false
      * add by 毛毛
-     * 需要提供额外字段：
-     * vip以及vip名,vip过期时间，如果未开通vip则返回未开通
-     * 2018年6月15日16:31:56
      */
     public static function get_user_index($uid){
         if (empty($uid)){
