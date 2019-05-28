@@ -26,7 +26,8 @@ class UserController extends Controller
             'headimgurl' => $user->headimgurl,
             'reg_time' => $user->reg_time,
             'office' => $user->office,
-            'position' => $user->position
+            'position' => $user->position,
+            'nickname' => $user->nickname
         ];
         RetServiceProvider::ret('0','成功',$user_info);
     }
