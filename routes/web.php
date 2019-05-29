@@ -18,6 +18,7 @@ Route::get('/index','Index\IndexController@index')->name('index');
 /*user*/
 Route::group(['prefix'=>'user'],function(){
     Route::any('/userinfo', 'User\UserController@get_userinfo')->middleware("user_auth");
+    Route::any('/update_userinfo', 'User\UserController@update_userinfo')->middleware("user_auth");
 });
 
 /*article*/

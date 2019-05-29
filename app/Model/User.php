@@ -136,5 +136,23 @@ class User extends Model
     }
 
 
+    /**
+     * 修改用户资料
+     * 成功返回用户信息，失败返回false
+     * add by 毛毛
+     */
+    public static function update_userinfo($uid,$data){
+        if (empty($uid)){
+            return false;
+        }
+        $res = DB::table('user')->where('uid',$uid)->update($data);
+        if (!$res){
+            return false;
+        }
+        if ($res){
+            return $res;
+        }
+        return false;
+    }
 
 }

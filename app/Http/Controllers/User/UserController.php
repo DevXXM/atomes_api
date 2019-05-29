@@ -25,14 +25,32 @@ class UserController extends Controller
             'username' => $user->username,
             'headimgurl' => $user->headimgurl,
             'reg_time' => $user->reg_time,
-            'office' => $user->office,
-            'position' => $user->position,
-            'nickname' => $user->nickname
+            'description' => $user->description,
+            'linkedin' => $user->linkedin,
+            'name' => $user->name
         ];
         RetServiceProvider::ret('0','成功',$user_info);
     }
 
 
-
+    /**
+     * 修改资料
+     * */
+    public function update_userinfo(Request $request){
+        $data = $request->request->all();
+        $uid = $request->userinfo->uid;
+        $user_info = [
+            'headimgurl' => $data['headimgurl'],
+            'description' => $data['description'],
+            'linkedin' => $data['linkedin'],
+            'name' => $data['name']
+        ];
+        $user = User::update_userinfo($uid,$user_info);
+        if ($user){
+            RetServiceProvider::ret('0','成功');
+        }else{
+            RetServiceProvider::ret_error('-1',"失败");
+        }
+    }
 
 }
