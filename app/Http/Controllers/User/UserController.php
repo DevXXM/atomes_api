@@ -47,9 +47,9 @@ class UserController extends Controller
         ];
         $user = User::update_userinfo($uid,$user_info);
         if ($user){
-            RetServiceProvider::ret('0','成功');
+            RetServiceProvider::ret('0','success');
         }else{
-            RetServiceProvider::ret_error('-1',"失败");
+            RetServiceProvider::ret_error('-1',"failed");
         }
     }
 
