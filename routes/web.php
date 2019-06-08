@@ -24,6 +24,8 @@ Route::group(['prefix'=>'user'],function(){
 /*article*/
 Route::group(['prefix'=>'event'],function(){
     Route::any('/info', 'Event\EventController@info');
+    Route::any('/list', 'Event\EventController@lists');
+
 });
 
 
@@ -31,6 +33,8 @@ Route::group(['prefix'=>'event'],function(){
 Route::group(['prefix'=>'login_user'],function(){
     Route::any('/sendsms', 'User\LoginController@sendSMS');
     Route::any('/login_act', 'User\LoginController@login');
+    Route::any('/reg_act', 'User\LoginController@reg');
+
 });
 
 

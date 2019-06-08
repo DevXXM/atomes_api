@@ -17,44 +17,12 @@ class User extends Model
      *add by 毛毛
      */
     public static function reg($user){
-        if (empty($user['openid'])){
-            return false;
-        }
-        $data = [
-            'openid' => $user['openid'],
-            'nickname' => $user['nickname'],
-            'sex' => $user['sex'],
-            'language' => $user['language'],
-            'city' => $user['city'],
-            'province' => $user['province'],
-            'country' => $user['country'],
-            'headimgurl' => $user['headimgurl']
-        ];
-        $res = DB::table('user')->where('openid',$user['openid'])->first();
-        if (!empty($res->uid)){
-            if ($res->status == -1){
-                return false;
-            }
-            DB::table('user')->where('uid','=',$res->uid)->update($data);
-//            echo '更新了资料';
-//            exit;
-            return $res->uid;
-        }
-
-        $uid = DB::transaction(function () use($data) {
-            $uid = DB::table('user')->insertGetId($data);
-            $vip = DB::table('vip')->insert([
-                'uid' => $uid,
-                'level' => 1,
-                'act_time' => time(),
-                'expires' => 2145887999 //2099年
-            ]);
-            return $uid;
-        });
+       $uid = DB::table('user')->insertGetId($user);
         if (empty($uid)){
             return false;
         }
-        return $uid;
+        $token = Token::make_token_key($uid);
+        return $token;
     }
 
     /**

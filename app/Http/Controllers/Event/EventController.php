@@ -7,6 +7,7 @@ use App\Providers\EmailServiceProvider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Providers\RetServiceProvider;
+use Illuminate\Support\Facades\DB;
 use PharIo\Manifest\Email;
 
 class EventController extends Controller
@@ -33,7 +34,20 @@ class EventController extends Controller
         RetServiceProvider::ret('0','成功',$info);
     }
 
-
+    /**
+     * home
+     * */
+    public function lists(Request $request){
+        $where = [
+            'status'=>'1',
+        ];
+        $list = DB::table("event")
+            ->selectRaw("id,name,cover,description")
+            ->where($where)
+            ->orderByDesc('id')
+            ->paginate(10);
+        RetServiceProvider::ret('0','成功',$list);
+    }
 
 
 }
