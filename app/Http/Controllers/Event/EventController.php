@@ -29,7 +29,8 @@ class EventController extends Controller
             'contact' => $data->contact,
             'description' => $data->description,
             'photo' => $data->photo,
-            'views' => $data->views
+            'views' => $data->views,
+            'peoples' => 1
         ];
         RetServiceProvider::ret('0','成功',$info);
     }
