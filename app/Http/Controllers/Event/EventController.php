@@ -28,7 +28,7 @@ class EventController extends Controller
             'address' => $data->address,
             'contact' => $data->contact,
             'description' => $data->description,
-            'photo' => $data->photo,
+            'photo' => json_decode($data->photo,true),
             'views' => $data->views,
             'peoples' => 1
         ];
