@@ -22,6 +22,8 @@ class EventController extends Controller
     public function info(Request $request){
         $id = $request->input('id');
         $data = Event::get_info($id);
+        $uid = $request->userinfo->uid;
+        $res = DB::table("join_list")->where(['uid'=>$uid,'event_id'=>$id,'status'=>1])->first();
         $info = [
             'id' => $data->id,
             'name' => $data->name,
@@ -30,8 +32,12 @@ class EventController extends Controller
             'description' => $data->description,
             'photo' => json_decode($data->photo,true),
             'views' => $data->views,
-            'peoples' => 1
+            'peoples' => 1,
+            'join' => false
         ];
+        if (!empty($res)){
+            $info['join'] = true;
+        }
         RetServiceProvider::ret('0','成功',$info);
     }
 
@@ -50,5 +56,42 @@ class EventController extends Controller
         RetServiceProvider::ret('0','成功',$list);
     }
 
+    /**
+     * 加入
+     * */
+    public function join_event(Request $request){
+        $event_id = $request->input('event_id');
+        $status = $request->input('status',"1");
+        $uid = $request->userinfo->uid;
+        if (empty($event_id)){
+            RetServiceProvider::ret_error(-1,'event id can not be empty');
+        }
+        if ($status == '-1'){
+            $res = DB::table("join_list")->where(['uid'=>$uid,'event_id'=>$event_id,'status'=>1])->first();
+            if (empty($res)){
+                RetServiceProvider::ret_error(0,"success");
+            }
+            $update = [
+                'status' => -1
+            ];
+            DB::table("join_list")->where(['uid'=>$uid,'event_id'=>$event_id,'status'=>1])->update($update);
+            RetServiceProvider::ret(0,"success");
+        }
 
+
+        $res = DB::table("event")->where(['id'=>$event_id,'status'=>1])->first();
+        if (empty($res)){
+            RetServiceProvider::ret_error(-1,'event not exist');
+        }
+
+        $res = DB::table("join_list")->where(['uid'=>$uid,'event_id'=>$event_id,'status'=>1])->first();
+        if (!empty($res)){
+            RetServiceProvider::ret_error(-1,'you have already join.');
+        }
+        $res = DB::table("join_list")->insert(['event_id'=>$event_id,'uid'=>$uid]);
+        if ($res){
+            RetServiceProvider::ret('0',"success");
+        }
+        RetServiceProvider::ret_error(-1,'failed');
+    }
 }
