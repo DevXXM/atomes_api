@@ -56,22 +56,7 @@ class EventController extends Controller
         RetServiceProvider::ret('0','成功',$list);
     }
 
-    /**
-     * home
-     * */
-    public function my_event(Request $request){
-        $where = [
-            'event.status'=>'1',
-            'join_list.status' => '1'
-        ];
-        $list = DB::table("event")
-            ->join('join_list','event.id','join_list.event_id')
-            ->selectRaw("atomes_event.id,atomes_event.name,atomes_event.cover,atomes_event.description")
-            ->where($where)
-            ->orderByDesc('join_list.id')
-            ->paginate(10);
-        RetServiceProvider::ret('0','成功',$list);
-    }
+
     /**
      * home
      * */

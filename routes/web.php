@@ -26,7 +26,6 @@ Route::group(['prefix'=>'event'],function(){
     Route::any('/info', 'Event\EventController@info')->middleware("user_auth");
     Route::any('/list', 'Event\EventController@lists');
     Route::any('/join', 'Event\EventController@join_event')->middleware("user_auth");
-    Route::any('/my_event', 'Event\EventController@my_event')->middleware("user_auth");
     Route::any('/my_project', 'Event\EventController@my_project')->middleware("user_auth");
 });
 
