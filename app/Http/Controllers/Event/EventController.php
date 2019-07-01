@@ -72,7 +72,21 @@ class EventController extends Controller
             ->paginate(10);
         RetServiceProvider::ret('0','成功',$list);
     }
-
+    /**
+     * home
+     * */
+    public function my_project(Request $request){
+        $where = [
+            'status'=>'1',
+            'uid' => $request->userinfo->uid
+        ];
+        $list = DB::table("event")
+            ->selectRaw("id,name,cover,description")
+            ->where($where)
+            ->orderByDesc('id')
+            ->paginate(10);
+        RetServiceProvider::ret('0','成功',$list);
+    }
 
 
     /**
